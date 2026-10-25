@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import HomePage from "./pages/HomePage"
+import NavBar from "./components/NavBar"
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <div className='bg-blue-400'>hello world ai website builder</div>
-    </>
+    <div>
+      <NavBar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+
+      </BrowserRouter>
+    </div>
   )
 }
 
