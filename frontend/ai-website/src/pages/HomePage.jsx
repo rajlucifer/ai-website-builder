@@ -1,11 +1,14 @@
 import react from "react";
 import { motion } from "motion/react"
+ 
+import Login from "../components/Login"
 // we use the framer motion for the animation in react motion
 
-const HomePage = () => {
+const HomePage = ({open,onclose}) => {
     const highlightCards = ["AI Generated Code",
         "Fully Responsive Layouts",
         "Production Ready Output",];
+     
     return (
         <div className="  bg-black text-white   overflow-hidden ">
             <section className="pt-44 pb-32 px-6 text-center">
@@ -37,13 +40,13 @@ const HomePage = () => {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <button className="mt-20 px-4 py-2 bg-white text-black font-medium   border-2 border-black rounded-lg hover:bg-white/90  ">
+                    <button className="mt-20 px-4 py-2 bg-white text-black font-medium   border-2 border-black rounded-lg hover:bg-white/90 "  onClick={open}>
                         Get Started
                     </button>
                 </motion.div>
 
             </section>
-            <seciton>
+            <section>
                 <div className="max-w-7xl  mx-auto px-6 pb-32 grid grid-cols-1 md:grid-cols-3  md:gap-x-2 gap-y-2">{highlightCards.map((card, index) => (<motion.div
                   key={index}
                   initial={{y:40 ,opacity:0}}
@@ -60,10 +63,13 @@ const HomePage = () => {
 
                     </p>
                 </motion.div>))}</div>
-            </seciton>
+            </section>
             <footer className="border-t border-2 border-white/10  py-4 px-2 text-center text-zinc-500">
                 &copy;{new Date().getFullYear()} genweb.ai
             </footer>
+
+
+             
         </div>
     )
 }
