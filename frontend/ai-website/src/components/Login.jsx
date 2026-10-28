@@ -3,8 +3,29 @@ import { motion } from "motion/react"
 import { animate } from "motion";
 import { FaWindowClose } from "react-icons/fa";
 import googleImg from "../assets/google.png"
+import { signInWithPopup } from "firebase/auth";
+import { provider, auth } from "../firebase";
+import axios from "axios";
+import {serverUrl} from "../App"
 // here we passing the props open and onclose
 const Login = ({open,onClose}) => {
+    const handleGoogleAuth = async()=>{
+        try{
+            const result = await signInWithPopup(auth,provider)
+            // here we get json result user data 
+            const data = await axios.post(`${serverUrl}/api/auth/google`,{
+                name:result.user.displayName,
+                email:result.user.email,
+                avatar:result.user.photoURL
+            },{withCredentials:true})
+            console.log(data);
+
+        }
+        catch(error){
+            console.log(error);
+
+        }
+    }
     return (
         <div>
             {open &&
@@ -41,7 +62,7 @@ const Login = ({open,onClose}) => {
                             >
                                 <div className="flex flex-row justify-center items-center  ">
                                     <img src={googleImg} alt="image" width={30} height={30}></img>
-                                    <h1>Continue With Google</h1>
+                                    <h1 onClick={handleGoogleAuth}>Continue With Google</h1>
                                 </div>
                             </motion.div>
                             <div className="flex w-full  items-center gap-3 my-7">
