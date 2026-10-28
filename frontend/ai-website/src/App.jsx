@@ -3,6 +3,8 @@ import HomePage from "./pages/HomePage"
 import NavBar from "./components/NavBar"
 import Login from "./components/Login"
 import { useState } from "react";
+// this is the url of backend
+export const serverUrl ="http://localhost:3000"
 function App() {
   const [openLogin, setOpenLogin] = useState(false);
   const handleOpenLogin = () => {
