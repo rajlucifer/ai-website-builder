@@ -7,8 +7,11 @@ import { signInWithPopup } from "firebase/auth";
 import { provider, auth } from "../firebase";
 import axios from "axios";
 import {serverUrl} from "../App"
+import { useDispatch } from "react-redux";
+import { setUserData } from "../redux/userSlice";
 // here we passing the props open and onclose
 const Login = ({open,onClose}) => {
+    const dispatch = useDispatch();
     const handleGoogleAuth = async()=>{
         try{
             const result = await signInWithPopup(auth,provider)
@@ -19,6 +22,9 @@ const Login = ({open,onClose}) => {
                 avatar:result.user.photoURL
             },{withCredentials:true})
             console.log(data);
+            // we also add the login data in the userData redux store
+            dispatch(setUserData(data))
+            onClose();
 
         }
         catch(error){
